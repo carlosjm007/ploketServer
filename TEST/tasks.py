@@ -16,7 +16,8 @@ def ordenar_jugadores(sala_id):
 	for ju in jugadores:
 		diccionario = {"id":ju.id,"angulo":angulo,"magnitud": 52.0}
 		angulo = angulo + distancia
-		Group(str(sala_id)).send({"text": json.dumps(diccionario)})
+		texto = json.dumps(diccionario)
+		Group(str(sala_id)).send({"bytes": texto.encode()})
 
 @background()
 def cuenta_regresiva():
@@ -28,4 +29,5 @@ def cuenta_regresiva():
 		if (sa.cuenta == 5):
 			ordenar_jugadores(sa.id)
 		diccionario = {"id":"Server", "cuenta": sa.cuenta}
-		Group(str(sa.id)).send({"text": json.dumps(diccionario)})
+		texto = json.dumps(diccionario)
+		Group(str(sa.id)).send({"bytes": texto.encode()})
